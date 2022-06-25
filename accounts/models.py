@@ -5,23 +5,23 @@ import uuid
 
 class UserManager(BaseUserManager):
     
-    def create_user(self, email, password=None):
+    def create_user(self, email, role, password=None):
         
         if email is None:
             raise TypeError('Users should have a Email')
         
-        user = self.model(email=self.normalize_email(email))
+        user = self.model(email=self.normalize_email(email), role=Roles.objects.get(id=role))
         user.set_password(password)
         user.save()
         
         return user
         
-    def create_superuser(self, email, password=None):
+    def create_superuser(self, email, role, password=None):
                 
         if password is None:
             raise TypeError('Password should not be none')
         
-        user = self.create_user(email=email, password=password)
+        user = self.create_user(email=email, password=password, role=Roles.objects.get(id=role))
         user.is_staff = True
         user.save()
         
@@ -30,6 +30,7 @@ class UserManager(BaseUserManager):
 class Users(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=50, unique=True, db_index=True)
     fullname = models.CharField(max_length=255, null=True)
+    role = models.ForeignKey('Roles', on_delete=models.CASCADE, default=None, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
@@ -46,7 +47,7 @@ class Users(AbstractBaseUser, PermissionsMixin):
         db_table = 'users'
         
     def __str__(self):
-        return self.username + ' | ' + self.email + ' | '
+        return  self.email
     
     def tokens(self):
         return ''
@@ -55,7 +56,7 @@ class Profiles(models.Model):
     user = models.OneToOneField(Users, on_delete=models.CASCADE, null=True)
     email = models.EmailField(max_length=150, null=True)
     fullname = models.CharField(max_length=255, null=True)
-    role = models.ForeignKey('Roles', on_delete=models.CASCADE, default=None, null=True)
+    role = models.IntegerField(null=True)
     avatar_image = models.ImageField(null=True, blank=True, upload_to='', default=None)
     dob = models.DateField(null=True, blank=True)
     address = models.CharField(max_length=150, null=True, blank=True)

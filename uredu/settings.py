@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'subjects.apps.SubjectsConfig',
     'semesters.apps.SemestersConfig',
     'exams_scores.apps.ExamsScoresConfig',
+    'constants.apps.ConstantsConfig',
     # Config Rest APIs
     'rest_framework',
     # JWT Token Authentication

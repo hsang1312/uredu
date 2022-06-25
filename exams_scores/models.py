@@ -9,6 +9,9 @@ class Exams(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        db_table = 'exams'
+        
     def __str__(self):
         return str(self.id)
     
@@ -20,5 +23,8 @@ class Scores(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        db_table = 'scores'
+        
     def __str__(self):
         return str(self.id)

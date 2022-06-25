@@ -11,6 +11,9 @@ class Timetables(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        db_table = 'timetables'
+        
     def __str__(self):
         return str(self.id)
     
@@ -23,6 +26,9 @@ class Timetable_details(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        db_table = 'timetable_details'
+        
     def __str__(self):
         return str(self.timetable)
 
@@ -36,6 +42,9 @@ class Timetable_requirements(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        db_table = 'timetable_requirements'
+        
     def __str__(self):
         return str(self.id)
     
@@ -47,6 +56,9 @@ class Block_requirements(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        db_table = 'block_requirements'
+        
     def __str__(self):
         return str(self.id)
     
@@ -58,6 +70,9 @@ class Shifts(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        db_table = 'shifts'
+        
     def __str__(self):
         return str(self.date_index)
     
@@ -70,6 +85,9 @@ class Attendances(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        db_table = 'attendances'
+        
     def __str__(self):
         return str(self.student_id)
     

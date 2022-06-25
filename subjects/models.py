@@ -7,5 +7,8 @@ class Subjects(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        db_table = 'subjects'
+        
     def __str__(self):
         return str(self.name)

@@ -42,6 +42,9 @@ class Users(AbstractBaseUser, PermissionsMixin):
     
     objects = UserManager()
     
+    class Meta:
+        db_table = 'users'
+        
     def __str__(self):
         return self.username + ' | ' + self.email + ' | '
     
@@ -62,6 +65,9 @@ class Profiles(models.Model):
     deleted_at = models.DateTimeField(auto_now=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False, db_index=True)
     
+    class Meta:
+        db_table = 'profiles'
+        
     def __str__(self):
         return str(self.user.username)
     
@@ -71,5 +77,8 @@ class Roles(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        db_table = 'roles'
+        
     def __str__(self):
         return str(self.name)

@@ -9,5 +9,8 @@ class Students(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        db_table = 'students'
+        
     def __str__(self):
         return str(self.profile.fullname)

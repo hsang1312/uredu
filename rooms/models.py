@@ -8,6 +8,9 @@ class Rooms(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        db_table = 'rooms'
+        
     def __str__(self):
         return str(self.name)
     
@@ -19,5 +22,8 @@ class Room_bookings(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        db_table = 'room_bookings'
+        
     def __str__(self):
         return str(self.id)

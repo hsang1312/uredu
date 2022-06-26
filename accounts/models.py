@@ -5,24 +5,25 @@ import uuid
 
 class UserManager(BaseUserManager):
     
-    def create_user(self, email, role, password=None):
+    def create_user(self, email, password=None):
         
         if email is None:
             raise TypeError('Users should have a Email')
         
-        user = self.model(email=self.normalize_email(email), role=Roles.objects.get(id=role))
+        user = self.model(email=self.normalize_email(email))
         user.set_password(password)
         user.save()
         
         return user
         
-    def create_superuser(self, email, role, password=None):
+    def create_superuser(self, email, password=None):
                 
         if password is None:
             raise TypeError('Password should not be none')
         
-        user = self.create_user(email=email, password=password, role=Roles.objects.get(id=role))
+        user = self.create_user(email=email, password=password)
         user.is_staff = True
+        user.is_superuser = True
         user.save()
         
         return user
@@ -30,7 +31,7 @@ class UserManager(BaseUserManager):
 class Users(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=50, unique=True, db_index=True)
     fullname = models.CharField(max_length=255, null=True)
-    role = models.ForeignKey('Roles', on_delete=models.CASCADE, default=None, null=True)
+    role = models.ForeignKey('Roles', on_delete=models.CASCADE, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
@@ -39,7 +40,7 @@ class Users(AbstractBaseUser, PermissionsMixin):
     deleted_at = models.DateTimeField(auto_now=True)
     
     USERNAME_FIELD = 'email'
-    # REQUIRED_FIELDS = ['email']
+    # REQUIRED_FIELDS = ['role']
     
     objects = UserManager()
     
@@ -70,7 +71,7 @@ class Profiles(models.Model):
         db_table = 'profiles'
         
     def __str__(self):
-        return str(self.user.username)
+        return str(self.user.email)
     
 class Roles(models.Model):
     name = models.CharField(null=True , blank=True, max_length=50, default=None)

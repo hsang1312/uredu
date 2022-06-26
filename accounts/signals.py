@@ -11,7 +11,8 @@ def create_profile(sender, instance, created, **kwargs):
         models.Profiles.objects.create(
             user=user,
             email=user.email,
-            role=user.role
+            fullname=user.fullname,
+            role=(models.Roles.objects.get(id=user.role))
         )
         
 @receiver(post_save, sender=models.Profiles)

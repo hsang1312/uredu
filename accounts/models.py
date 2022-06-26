@@ -43,7 +43,7 @@ class Users(AbstractBaseUser, PermissionsMixin):
     deleted_at = models.DateTimeField(auto_now=True)
     
     USERNAME_FIELD = 'email'
-    # REQUIRED_FIELDS = ['role']
+    REQUIRED_FIELDS = ['fullname']
     
     objects = UserManager()
     

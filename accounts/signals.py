@@ -25,7 +25,7 @@ def update_profile(sender, instance, created, **kwargs):
         try:
             user.email = profile.email
             user.fullname = profile.fullname
-            user.role = profile.role
+            user.role = profile.role.id
             user.save()
         except:
             pass

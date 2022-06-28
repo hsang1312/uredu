@@ -27,5 +27,8 @@ class MyTokenObtainPairView(TokenObtainPairView):
 urlpatterns = [
     path('login/', MyTokenObtainPairView.as_view(), name='login-access'),
     path('login/refresh/', TokenRefreshView.as_view(), name='login-refresh'),
+    path('list/', views.ListAccountProfileView.as_view(), name='list-account-profile'),
+    path('create/', views.CreateAccountView.as_view(), name='account-create'),
+    path('<str:pk>/profile/', views.AccountProfileDetailView.as_view(), name='account-profile'),
     # path('logout/', views.LogoutVIew.as_view(), name='logout'),
 ]

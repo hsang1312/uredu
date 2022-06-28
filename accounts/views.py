@@ -26,7 +26,7 @@ class ListAccountProfileView(generics.ListAPIView):
     serializer_class = serializers.AccountProfileSerializer
     permission_classes = [permissions.IsAdmin]
 
-class AccountProfileDetailView(generics.RetrieveUpdateDestroyAPIView):
+class AccountProfileDetailView(generics.RetrieveUpdateAPIView):
     queryset = models.Profiles.objects.all()
     serializer_class = serializers.AccountProfileSerializer
     permission_classes = [permissions.IsAdmin]

@@ -17,7 +17,10 @@ class UserManager(BaseUserManager):
         return user
         
     def create_superuser(self, email, fullname, password=None):
-        create_role_admin = Roles.objects.get_or_create(name='admin')
+        Roles.objects.get_or_create(name='admin')
+        Roles.objects.get_or_create(name='student')
+        Roles.objects.get_or_create(name='teacher')
+        Roles.objects.get_or_create(name='manager')
         
         if password is None:
             raise TypeError('Password should not be none')
@@ -33,14 +36,14 @@ class UserManager(BaseUserManager):
                    
 class Users(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=50, unique=True, db_index=True)
-    fullname = models.CharField(max_length=255)
-    role = models.IntegerField()
+    fullname = models.CharField(max_length=255, null=True)
+    role = models.IntegerField(null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField()
+    deleted_at = models.DateTimeField(null=True, blank=True)
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['fullname']
@@ -59,15 +62,15 @@ class Users(AbstractBaseUser, PermissionsMixin):
 class Profiles(models.Model):
     user = models.OneToOneField(Users, on_delete=models.SET_NULL, null=True)
     email = models.EmailField(max_length=150)
-    fullname = models.CharField(max_length=255)
+    fullname = models.CharField(max_length=255, null=True)
     role = models.ForeignKey('Roles', on_delete=models.CASCADE)
     avatar_image = models.ImageField(null=True, blank=True, upload_to='', default=None)
-    dob = models.DateField()
-    address = models.CharField(max_length=150)
+    dob = models.DateField(null=True)
+    address = models.CharField(max_length=150, null=True)
     phone = models.CharField(max_length=150)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField()
+    deleted_at = models.DateTimeField(null=True, blank=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False, db_index=True)
     
     class Meta:
@@ -80,7 +83,7 @@ class Roles(models.Model):
     name = models.CharField(null=True , blank=True, max_length=50, default=None)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True, blank=True)
     
     class Meta:
         db_table = 'roles'

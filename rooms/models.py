@@ -6,7 +6,7 @@ class Rooms(models.Model):
     name = models.CharField(max_length=150, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True, blank=True)
     
     class Meta:
         db_table = 'rooms'
@@ -20,7 +20,7 @@ class Room_bookings(models.Model):
     shift = models.ForeignKey(Shifts, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True, blank=True)
     
     class Meta:
         db_table = 'room_bookings'

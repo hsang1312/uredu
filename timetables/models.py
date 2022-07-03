@@ -9,7 +9,7 @@ class Timetables(models.Model):
     semester = models.ForeignKey(Semesters, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True, blank=True)
     
     class Meta:
         db_table = 'timetables'
@@ -24,7 +24,7 @@ class Timetable_details(models.Model):
     subject = models.ForeignKey(Subjects, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True, blank=True)
     
     class Meta:
         db_table = 'timetable_details'
@@ -40,7 +40,7 @@ class Timetable_requirements(models.Model):
     timetable = models.OneToOneField(Timetables, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True, blank=True)
     
     class Meta:
         db_table = 'timetable_requirements'
@@ -54,7 +54,7 @@ class Block_requirements(models.Model):
     day_number = models.IntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True, blank=True)
     
     class Meta:
         db_table = 'block_requirements'
@@ -68,7 +68,7 @@ class Shifts(models.Model):
     end = models.CharField(max_length=150, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True, blank=True)
     
     class Meta:
         db_table = 'shifts'
@@ -83,7 +83,7 @@ class Attendances(models.Model):
     is_attended = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True, blank=True)
     
     class Meta:
         db_table = 'attendances'

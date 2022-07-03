@@ -30,12 +30,12 @@ def update_profile(sender, instance, created, **kwargs):
         except:
             pass
   
-@receiver(post_delete, sender=models.Profiles)
-def delete_profile(sender, instance, **kwargs):
-    # Xóa Profile thì sẽ xóa luôn cả User
-    try:
-        profile = instance
-        user = profile.user
-        user.delete()
-    except:
-        pass
+# @receiver(post_delete, sender=models.Profiles)
+# def delete_profile(sender, instance, **kwargs):
+#     # Xóa Profile thì sẽ xóa luôn cả User
+#     try:
+#         profile = instance
+#         user = profile.user
+#         user.delete()
+#     except:
+#         pass

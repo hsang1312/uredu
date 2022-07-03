@@ -10,14 +10,14 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super().get_token(user)
 
         # Add custom claims
-        if user.profiles.role == roles.MANAGER:
-            token['role'] = roles.MANAGER
-        elif user.profiles.role == roles.STUDENT:
-            token['role'] = roles.STUDENT
-        elif user.profiles.role == roles.TEACHER:
-            token['role'] = roles.TEACHER
-        elif user.profiles.role == roles.ADMIN:
-            token['role'] = roles.ADMIN
+        if user.profiles.role.id == roles.MANAGER:
+            token['role_id'] = roles.MANAGER
+        elif user.profiles.role.id == roles.STUDENT:
+            token['role_id'] = roles.STUDENT
+        elif user.profiles.role.id == roles.TEACHER:
+            token['role_id'] = roles.TEACHER
+        elif user.profiles.role.id == roles.ADMIN:
+            token['role_id'] = roles.ADMIN
         # ...
         return token
 
@@ -30,5 +30,7 @@ urlpatterns = [
     path('list/', views.ListAccountProfileView.as_view(), name='list-account-profile'),
     path('create/', views.CreateAccountView.as_view(), name='account-create'),
     path('<str:pk>/profile/', views.AccountProfileDetailView.as_view(), name='account-profile'),
+    path('delete/<str:pk>/', views.AccountDeActivateView.as_view(), name='account-delete'),
+    path('active/', views.AccountDeActivateView.as_view(), name='account-active'),
     # path('logout/', views.LogoutVIew.as_view(), name='logout'),
 ]

@@ -13,6 +13,10 @@ class CreateAccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Users
         fields = ('email', 'fullname', 'role', 'dob', 'address', 'phone')
+        extra_kwargs = {
+            'fullname': {'required': True },
+            'role': {'required': True },
+        }
         
     def validate_role(self, value):
         account_role = value
@@ -80,10 +84,4 @@ class AccountProfileSerializer(serializers.ModelSerializer):
         instance.phone = validated_data.get('phone', instance.phone)
         instance.save()
         return instance
-    
-    # def delete(self, instance, validated_data):
-    #     user = instance.user
-    #     user.is_active = False
-    #     instance.deleted_at = datetime.datetime.now()
-    #     return instance
-        
+            

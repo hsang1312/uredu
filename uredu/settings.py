@@ -179,10 +179,26 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-from datetime import timedelta
+from datetime import timedelta, datetime
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=3),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=15),
     # 'ROTATE_REFRESH_TOKENS': True,
     # 'BLACKLIST_AFTER_ROTATION': True
 }
+
+
+"""
+Email settings
+"""
+import ssl
+from django.utils import timezone
+
+EMAIL_USERNAME = 'sangtest13@gmail.com'
+EMAIL_PASSWORD = 'lgssluunyswgencs'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_CONTEXT = ssl.create_default_context()
+EMAIL_RESET_TOKEN_EXPIRE_MINUTES = timedelta(minutes=15)
+TIME_NOW = timezone.now()
+RESET_STRING_TOKEN = 'ured'

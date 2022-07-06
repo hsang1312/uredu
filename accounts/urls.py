@@ -32,5 +32,8 @@ urlpatterns = [
     path('<str:pk>/profile/', views.AccountProfileDetailView.as_view(), name='account-profile'),
     path('delete/<str:pk>/', views.AccountDeActivateView.as_view(), name='account-delete'),
     path('active/', views.AccountDeActivateView.as_view(), name='account-active'),
+    path('forget-password/', views.ForgetPasswordRequestView.as_view(), name='account-forget-password'),
+    path('check-token-valid/', views.ResetPasswordCheckTokenView.as_view(), name='account-check-token'),
+    path('reset-password/', views.ResetPasswordView.as_view(), name='account-reset-password'),
     # path('logout/', views.LogoutVIew.as_view(), name='logout'),
 ]
